@@ -13,13 +13,13 @@ def get_hex_string_from_rgb(rgba):
     rgba = [color/255 for color in rgba]
     return rgb2hex(rgba[:3]) 
 
-def single_legend(ax, label_prefix, years):
-    red_patch = mpatches.Patch(color='red', label=f'{label_prefix} {years[0]}')
+def single_legend(ax, label_prefix, year):
+    red_patch = [mpatches.Patch(color='red', label=f'{label_prefix} {year}')]
     ax.legend(
         handles=red_patch,
         loc=4,
         handlelength=0.7,
-        columnsspacing=0.5,
+        columnspacing=0.5,
         fancybox=True,
         framealpha=1
     )
@@ -27,7 +27,7 @@ def single_legend(ax, label_prefix, years):
 # do not include white in the list of hex colors
 def comparison_legend(ax, label_prefix, hex_colors, years):
     label_name = [f'{label_prefix} {years[1]}', f'{label_prefix} {years[1]} & {years[0]}', f'{label_prefix} {years[0]}']
-    legend_item = [mpatches.Patch(color=color, label=label) for color, label in zip(hex_colors, label_name)]
+    legend_item = [mpatches.Patch(color=color, label=label) for color, label in zip(hex_colors[1:], label_name)]
     return ax.legend(handles=legend_item,
         loc=4,
         ncol=4,
